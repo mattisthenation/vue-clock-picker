@@ -2,7 +2,7 @@
 
 div
 	div(v-if="type=='minute'" id="picker-pointer-container")
-		picker-points(v-for="(m,i) in MINUTES" v-if="i%5==0" ':index'="i" ':key'="i" ':angle'="6*i" ':handle-time-change'="handleTimePointerClick" ':picked'="i==minute")
+		picker-points(v-for="(m,i) in MINUTES" v-if="i%5==0" ':index'="i" ':key'="i" ':display'="minuteDisplay(i)" ':angle'="6*i" ':handle-time-change'="handleTimePointerClick" ':picked'="i==minute")
 	div(v-else id="picker_pointer_container")
 		picker-points(v-for="(h,i) in TWELVE_HOURS" ':index'="interval=='AM'?i:i+12" ':key'="interval=='AM'?i:i+12" ':display'="hourDisplay(i)" ':angle'="30*i" ':handle-time-change'="handleTimePointerClick" ':picked'="interval=='AM'?i==hour:(i+12)==hour")
 		div(class="interval-container")
@@ -72,8 +72,12 @@ export default {
           return i;
       } else {
         // 24 hour display
-        return interval=='AM'?i:i+12
+        return this.interval=='AM'?i:i+12
       }
+    },
+
+    minuteDisplay(i) {
+      return i;
     }
   }
 }

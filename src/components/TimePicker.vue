@@ -2,7 +2,7 @@
 	<div class="time-picker-container">
 		<div class="time-picker-preview" @click="toggleFocus" :class="{active:focused}" @mouseover="overElement=true" @mouseout="overElement=false">
 			<div class="preview-container">
-				{{hourString}}:{{minuteString}}
+				{{previewTime}}
 			</div>
 		</div>
 		<outside-click-handler :on-outside-click="onClearFocus" :focused="focused">
@@ -75,6 +75,18 @@ export default {
     },
     minuteString() {
       return this.minute < 10 ? '0' + this.minute : this.minute + ''
+    },
+    previewTime() {
+      if( this.mode == 12) {
+        let hourTime = this.hour > 12 ? this.hour - 12 : this.hour;
+        if( hourTime < 10 )
+          hourTime = '0' + hourTime;
+          
+        return hourTime + ':' + this.minuteString;
+      } else {
+        return this.hourString + ':' + this.minuteString;
+      }
+
     }
   },
   methods: {

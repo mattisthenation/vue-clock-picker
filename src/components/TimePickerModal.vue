@@ -2,11 +2,11 @@
 
 div(class="time-picker-modal-container")
 	div(class="time-picker-modal-header")
-		span(@click="handleStepChange(0)" class="time-picker-header" ':class'="{active:!step}") {{hourString}}
+		span(@click="handleStepChange(0)" class="time-picker-header" ':class'="{active:!step}") {{hourDisplay}}
 		| &nbsp;:&nbsp;
 		span(@click="handleStepChange(1)" class="time-picker-header" ':class'="{active:step}") {{minuteString}}
 	div(class="picker-container")
-		time-picker-generator(':handle-time-pointer-click'="handleTimePointerClick" ':type'="timeType" ':hour'="hour" ':minute'="minute")
+		time-picker-generator(':handle-time-pointer-click'="handleTimePointerClick" ':type'="timeType" ':hour'="hour" ':minute'="minute" ':mode'="mode")
 
 </template>
 
@@ -18,6 +18,10 @@ import {
 import TimePickerGenerator from './TimePickerGenerator.vue'
 export default {
   props: {
+    mode: {
+      type: Number,
+      default: 24
+    },
     initStep: {
       type: Number,
       default: 0
@@ -58,6 +62,12 @@ export default {
     },
     minuteString() {
       return this.minute < 10 ? '0' + this.minute : this.minute
+    },
+    hourDisplay() {
+      let hourTime = this.hour > 12 ? this.hour - 12 : this.hour;
+      if( hourTime < 10 )
+        hourTime = '0' + hourTime;
+      return hourTime;
     }
   },
   components: {
@@ -73,7 +83,6 @@ export default {
     handleTimePointerClick(time, rotate) {
       this.pointerRotate = rotate
       this.handleTimeChange(time)
-      console.log('time changed')
     },
     handleTimeChange(time) {
       time = parseInt(time)
