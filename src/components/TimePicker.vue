@@ -7,6 +7,7 @@
 		</div>
 		<outside-click-handler :on-outside-click="onClearFocus" :focused="focused">
 			<time-picker-modal
+        :mode="mode"
 				:init-hour="hour" :init-minute="minute" slot="modal"
 				:handle-hour-change="handleHourChange" :handle-minute-change="handleMinuteChange"
 				:handle-time-change="handleTimeChange" v-if="focused"

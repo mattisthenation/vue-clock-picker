@@ -4,7 +4,7 @@ div
 	div(v-if="type=='minute'" id="picker-pointer-container")
 		picker-points(v-for="(m,i) in MINUTES" v-if="i%5==0" ':index'="i" ':key'="i" ':angle'="6*i" ':handle-time-change'="handleTimePointerClick" ':picked'="i==minute")
 	div(v-else id="picker_pointer_container")
-		picker-points(v-for="(h,i) in TWELVE_HOURS" ':index'="interval=='AM'?i:i+12" ':key'="interval=='AM'?i:i+12" ':angle'="30*i" ':handle-time-change'="handleTimePointerClick" ':picked'="interval=='AM'?i==hour:(i+12)==hour")
+		picker-points(v-for="(h,i) in TWELVE_HOURS" ':index'="interval=='AM'?i:i+12" ':key'="interval=='AM'?i:i+12" ':display'="hourDisplay(i)" ':angle'="30*i" ':handle-time-change'="handleTimePointerClick" ':picked'="interval=='AM'?i==hour:(i+12)==hour")
 		div(class="interval-container")
 			span(@click="handleIntervalChange('AM')" class="time-picker-interval" ':class'="{active:interval=='AM'}") AM
 			| &nbsp;|&nbsp;
@@ -54,9 +54,26 @@ export default {
   components: {
     PickerPoints
   },
+  computed: {
+    
+  },
   methods: {
     handleIntervalChange(itv) {
       this.interval = itv
+    },
+
+    hourDisplay(i) {
+      //interval=='AM'?i:i+12
+      if( this.mode == 12 ) {
+        // 12 hour display
+        if(i == 0)
+          return 12;
+        else
+          return i;
+      } else {
+        // 24 hour display
+        return interval=='AM'?i:i+12
+      }
     }
   }
 }

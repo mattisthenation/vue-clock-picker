@@ -1,7 +1,7 @@
 <template lang="pug">
 
 div(':style'="inlineStyle" '@click'="handleTimeChange(index,angle)" class="picker-point" ':class'="[pointClass,{current:picked}]")
-	div(class="pointer-wrapper" ':style'="wrapperStyle") {{index}}
+	div(class="pointer-wrapper" ':style'="wrapperStyle") {{display}}
 
 </template>
 
@@ -10,6 +10,9 @@ export default {
   props: {
     index: {
       type: Number,
+    },
+    display: {
+      type: Number
     },
     angle: {
       type: Number
