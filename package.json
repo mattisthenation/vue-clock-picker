@@ -1,8 +1,8 @@
 {
-  "name": "vue-clock-picker-alt",
+  "name": "vue-clock-picker-5",
   "version": "0.4.1",
   "description": "A lite time picker based on Vue2.0",
-  "author": "domon <domonji95@gmail.com>",
+  "author": "Matt <mattisthenation@gmail.com>",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
@@ -64,5 +64,5 @@
     "webpack-merge": "^0.8.3"
   },
   "license": "MIT",
-  "repository": "https://github.com/domonji/vue-clock-picker"
+  "repository": "https://github.com/mattisthenation/vue-clock-picker"
 }
