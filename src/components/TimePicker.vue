@@ -79,8 +79,11 @@ export default {
     previewTime() {
       if( this.mode == 12) {
         let hourTime = this.hour > 12 ? this.hour - 12 : this.hour;
-        if( hourTime < 10 )
+        if( hourTime == 0 )
+          hourTime = 12;
+        else if( hourTime < 10 )
           hourTime = '0' + hourTime;
+        
           
         return hourTime + ':' + this.minuteString;
       } else {
@@ -122,7 +125,11 @@ export default {
       this.onTimeChange && this.onTimeChange({
         hour: this.hour,
         minute: this.minute
-      })
+      });
+      this.$emit('chosen', {
+        hour: this.hour,
+        minute: this.minute
+      });
     }
   }
 }
